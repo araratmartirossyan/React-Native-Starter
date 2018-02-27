@@ -18,7 +18,7 @@ import Drawer from './src/components/Drawer'
 
 const enhancer = compose(
   applyMiddleware(logger),
-  install()  
+  install()
 )
 const store = createStore(appReducers, enhancer)
 

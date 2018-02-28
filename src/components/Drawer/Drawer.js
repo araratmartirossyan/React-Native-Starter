@@ -1,45 +1,40 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native'
 import { menu } from './menu.mock'
+
+
+
 export default class Drawer extends React.Component {
 
-  onShowModal = () => {
-    this.toggleDrawer()
-    this.props.navigator.showModal({
-      screen: 'example.Modal',
-      title: `Modal`
-    })
-  }
-
-  goToProfile = () => console.log('we will go to profile')
-
-  onPushToFirstTab = () => {
+  goTo = () => {
     this.toggleDrawer()
     this.props.navigator.handleDeepLink({
-      link: 'tab1/example.Types.Push'
+      link: 'msapp.Login',
+      title: 'Pushed Screen'
     })
   }
 
-  toggleDrawer = () => {
+  toggleDrawer = () =>
     this.props.navigator.toggleDrawer({
       side: 'left'
     })
-  }
 
-  renderButton = item =>
-    <View style={styles.button}>
+  renderButton = ({ action, title, link }, key) =>
+    <View
+      key={key}
+      style={styles.button}
+    >
       <Button
-        onPress={this[item.action]}
-        title={item.title}
+        onPress={this.goTo}
+        title={title}
         color="#fff"
       />
     </View>
 
-
   render() {
     return (
       <View style={styles.container}>
-        {menu.map(item => this.renderButton(item))}
+        {menu.map((item, key) => this.renderButton(item, key))}
       </View>
     )
   }

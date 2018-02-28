@@ -23,7 +23,6 @@ const enhancer = compose(
 const store = createStore(appReducers, enhancer)
 
 export function registerScreens() {
-  Navigation.registerComponent('msapp.App', () => App, store, Provider)
   Navigation.registerComponent('msapp.Login', () => Login, store, Provider)
   Navigation.registerComponent('msapp.Root', () => Root, store, Provider)
   Navigation.registerComponent('msapp.SignUp', () => SignUp, store, Provider)

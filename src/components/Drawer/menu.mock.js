@@ -2,27 +2,32 @@ export const menu = [
   {
     title: 'Профиль',
     link: 'profile',
-    action: 'goToProfile'
+    action: 'goToProfile',
   },
   {
     title: 'Мой автомобиль',
-    link: 'profile'
+    link: 'profile',
+    action: 'goToMyCar'
   },
   {
     title: 'Кошелек',
-    link: 'profile'
+    link: 'profile',
+    action: 'goToWallet'
   },
   {
     title: 'Мои отчеты',
-    link: 'profile'
+    link: 'profile',
+    action: 'goToList'
   },
   {
     title: 'Настройки',
-    link: 'profile'
+    link: 'profile',
+    action: 'goTosettings'
   },
   {
     title: 'О приложении',
-    link: 'profile'
+    link: 'profile',
+    action: 'goToAbout'
   },
   {
     title: 'Выход',

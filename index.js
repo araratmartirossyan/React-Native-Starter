@@ -7,13 +7,16 @@ AppRegistry.registerComponent('msapp', () => App)
 
 registerScreens()
 
-
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'msapp.App',
-    title: 'Welcome',
+    screen: 'msapp.Root',
+    title: 'MakeSafe',
     navigatorStyle: {
-      navBarBackgroundColor: '#1b84e9'
+      navBarBackgroundColor: '#1b84e9',
+      navBarTextColor: '#fff',
+      navBarNoBorder: true,
+      statusBarTextColorSchemeSingleScreen: 'light',
+      statusBarTextColorScheme: 'light'
     },
     navigatorButtons: {}
   },

@@ -12,9 +12,10 @@ export default class Login extends Component {
   }
 
   render() {
+    console.log('render')
     return (
       <View>
-        <Text>dasdasdasd</Text>
+        <Text>This is Login Page</Text>
       </View>
     )
   }

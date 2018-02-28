@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'https://rallycoding.herokuapp.com/'
+const URL = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevinextended/'
 
 const clientApi = (type, url, params) => {
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN

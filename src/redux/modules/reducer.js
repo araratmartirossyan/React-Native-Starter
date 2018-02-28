@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux-loop'
 import { reducer as form } from 'redux-form'
 import user from './user'
+import vinDecoder from './vinDecoder'
 
 const appReducers = combineReducers({
   user,
-  form
+  form,
+  vinDecoder
 })
 
 // const reducers = (state, action) => {

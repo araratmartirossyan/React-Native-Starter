@@ -1,16 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native'
 import { menu } from './menu.mock'
-
-
+import { homeNavigator } from '../../containers/Root/Root.js'
 
 export default class Drawer extends React.Component {
-
-  goTo = () => {
+  goTo = link => () => {
+    const { navigator } = this.props
     this.toggleDrawer()
-    this.props.navigator.handleDeepLink({
-      link: 'msapp.Login',
-      title: 'Pushed Screen'
+    homeNavigator.push({
+      screen: `msapp.${link}`
     })
   }
 
@@ -25,13 +23,14 @@ export default class Drawer extends React.Component {
       style={styles.button}
     >
       <Button
-        onPress={this.goTo}
+        onPress={this.goTo(link)}
         title={title}
         color="#fff"
       />
     </View>
 
   render() {
+    console.log(this.props)
     return (
       <View style={styles.container}>
         {menu.map((item, key) => this.renderButton(item, key))}

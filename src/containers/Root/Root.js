@@ -18,8 +18,8 @@ import {
 } from 'react-native'
 
 const { width, height } = Dimensions.get('window');
-
 const title = 'Проверьте отчеты о машине просто введя Vin-код'
+export let homeNavigator = null
 
 @connect(state => {
   const { vinDecoder } = state
@@ -34,7 +34,12 @@ const title = 'Проверьте отчеты о машине просто вв
 @reduxForm({
   form: 'vinCode'
 })
+
 export default class Root extends Component {
+  constructor(props) {
+    super(props)
+    homeNavigator = this.props.navigator
+  }
 
   callReducer = values => this.props.fetch(values)
 
@@ -81,8 +86,6 @@ export default class Root extends Component {
   renderCarInfo = () => {
     const { carInfo } = this.props
     const data = Object.values(carInfo).splice(4, 12)
-
-    console.log('we will render', carInfo)
 
     return (
       <View style={styles.block}>

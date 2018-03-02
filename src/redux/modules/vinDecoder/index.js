@@ -2,7 +2,7 @@ import { createAction, createReducer } from 'redux-act'
 import { loop, Cmd } from 'redux-loop'
 import { clientApi } from '../../../utils/clientApi'
 import axios from 'axios'
-import R from 'ramda'
+import { pathOr } from 'ramda'
 
 const initialState = {
   isWorking: false
@@ -11,7 +11,6 @@ const initialState = {
 export const fetch = createAction('makesafe/vinDecoder/FETCH')
 export const fetchSuccess = createAction('makesafe/vinDecoder/FETCH_SUCCESS')
 export const fetchFailure = createAction('makesafe/vinDecoder/FETCH_FAILURE')
-
 
 const selector = item => {
   const carInfo = {}
@@ -23,31 +22,23 @@ const selector = item => {
   return carInfo
 }
 
-export const request = (payload) => {
-    console.log('FROM THE TOP', payload)
-    return clientApi('get', `${payload}?format=json`)
-    .then(fetchSuccess)
-    .catch(fetchFailure)
-}
+export const request = (payload) =>
+  clientApi('get', `${payload}?format=json`)
+  .then(fetchSuccess)
+  .catch(fetchFailure)
 
+export const handleFetch = (state, { vinCode }) =>
+  loop({
+    ...state,
+    isLoading: true,
+    isLoaded: false,
 
-export const handleFetch = (state, { vinCode }) => {
-    console.log(vinCode, 'important')
-    return loop(
-        {
-          ...state,
-          isLoading: true,
-          isLoaded: false,
-          
-        }, Cmd.run(request, {
-          successActionCreator: fetchSuccess,
-          failActionCreator: fetchFailure,
-          args: [vinCode]
-        })
-      )
-}
-  
-  
+  }, Cmd.run(request, {
+    successActionCreator: fetchSuccess,
+    failActionCreator: fetchFailure,
+    args: [vinCode]
+  }))
+
 export const handleFetchSuccess = (state, { payload }) => {
   const data = R.pathOr([], ['data', 'Results'], payload)
   const carInfo = data.filter(item => item.Value !== null)
@@ -59,17 +50,17 @@ export const handleFetchSuccess = (state, { payload }) => {
     carInfo
   })
 }
- 
-  export const handleFetchFailure = (state, payload) =>
-    ({
-      ...state,
-      isLoading: false,
-      isLoaded: false,
-      isError: payload
-      // errors: getErrorMessage(payload) 
-      // need to create utils function for getting error 
-      // all error need to make in one format
-    })
+
+export const handleFetchFailure = (state, payload) =>
+  ({
+    ...state,
+    isLoading: false,
+    isLoaded: false,
+    isError: payload
+    // errors: getErrorMessage(payload) 
+    // need to create utils function for getting error 
+    // all error need to make in one format
+  })
 
 const reducer = createReducer(on => {
   on(fetch, handleFetch)

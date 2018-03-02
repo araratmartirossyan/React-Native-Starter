@@ -4,7 +4,6 @@ import R from 'ramda'
 
 export default class Input extends Component {
   static defaultProps = {
-    size: 's',
     onChangeFunc: () => {}
   }
 
@@ -17,9 +16,7 @@ export default class Input extends Component {
 
   render() {
     const {
-      className,
       placeholder,
-      size,
       error,
       success,
       mask,
@@ -42,8 +39,6 @@ export default class Input extends Component {
     )
   }
 }
-
-
 
 const styles = StyleSheet.create({
     input: {
